@@ -1,14 +1,15 @@
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.YouTubeVideo;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,9 +28,11 @@ public class Controller {
     @FXML
     Button start;
 
-
     @FXML
     Stage stage;
+
+    @FXML
+    ComboBox kombo;
 
 
     public void initialize() {
@@ -37,6 +40,14 @@ public class Controller {
                 128, 128, true, true);
         start.setGraphic(new ImageView(image));
 
+        ObservableList<YouTubeVideo> listaFilmikow =
+                FXCollections.observableArrayList();
+        listaFilmikow.add(new YouTubeVideo("a","a","a","a"));
+        listaFilmikow.add(new YouTubeVideo("b","a","a","a"));
+        listaFilmikow.add(new YouTubeVideo("c","a","a","a"));
+
+        kombo.setItems(listaFilmikow);
+        selectFirstInKombo();
     }
 
 
@@ -55,5 +66,22 @@ public class Controller {
         chooser.setTitle("Otwórz plik...");
         File f = chooser.showOpenDialog(stage);
         if (f!=null) loadWords(f);
+    }
+
+    public void addVideo() {
+        YouTubeVideo nowe = new YouTubeVideo(in.getText(),
+                out.getText(), "...", "....");
+        kombo.getItems().add(nowe);
+        selectLastInCombo();
+    }
+
+
+    private void selectFirstInKombo() {
+        kombo.getSelectionModel().select(0);
+    }
+
+    private void selectLastInCombo() {
+        int n = kombo.getItems().size();
+        kombo.getSelectionModel().select(n-1);
     }
 }

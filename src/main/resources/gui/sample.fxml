@@ -12,6 +12,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ComboBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="Controller"
@@ -39,6 +40,7 @@
         <left>
             <VBox prefWidth="200">
                 <Button fx:id="start"></Button>
+                <ComboBox fx:id="kombo"></ComboBox>
             </VBox>
         </left>
 
@@ -48,6 +50,7 @@
                     <TextField fx:id="in"></TextField>
                     <TextField fx:id="out"></TextField>
                 </HBox>
+                <Button onAction="#addVideo">Add video</Button>
             </VBox>
         </center>
 
